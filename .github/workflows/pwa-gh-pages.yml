@@ -35,7 +35,7 @@ jobs:
           node-version: 20
           cache: 'npm'
       - run: npm ci
-      - run: npm run build-only --if-present -- --base /mptt-pwa/
+      - run: npm run build-only --if-present -- --base /mqtt-pwa/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
