@@ -8,13 +8,13 @@ const randomNotification = async () => {
   let options = {
     body: 'メッセージ'
   }
-  sw?.showNotification('タイトル', options)
-  setTimeout(randomNotification, 30000)
+  if (sw && Notification.permission === 'granted') {
+    sw.showNotification('タイトル', options)
+    setTimeout(randomNotification, 30000)
+  }
 }
 
 onMounted(() => {
-  // MQTTブローカーに接続
-
   // 通知設定
   Notification.requestPermission().then((permission) => {
     if (permission === 'granted') {
