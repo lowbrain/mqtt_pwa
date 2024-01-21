@@ -3,11 +3,12 @@ import { onMounted } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 
-const randomNotification = () => {
+const randomNotification = async () => {
+  const sw = await navigator.serviceWorker.getRegistration()
   let options = {
     body: 'メッセージ'
   }
-  new Notification('タイトル', options)
+  sw?.showNotification('タイトル', options)
   setTimeout(randomNotification, 30000)
 }
 
