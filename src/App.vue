@@ -1,6 +1,26 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+
+const randomNotification = () => {
+  let options = {
+    body: 'メッセージ'
+  }
+  new Notification('タイトル', options)
+  setTimeout(randomNotification, 30000)
+}
+
+onMounted(() => {
+  // MQTTブローカーに接続
+
+  // 通知設定
+  Notification.requestPermission().then((permission) => {
+    if (permission === 'granted') {
+      randomNotification()
+    }
+  })
+})
 </script>
 
 <template>
