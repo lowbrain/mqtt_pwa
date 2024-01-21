@@ -3,15 +3,10 @@ import { onMounted } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 
-const askNotifyPermission = async () => {
-  const permissionResult = await Notification.requestPermission()
-  if (permissionResult && permissionResult !== 'granted') {
-    throw new Error("We weren't granted permission.")
-  }
-}
-
 onMounted(() => {
-  askNotifyPermission()
+  Notification.requestPermission( permission => {
+    if (permission !== 'granted') throw new Error("We weren't granted permission.")
+  })
 })
 </script>
 
