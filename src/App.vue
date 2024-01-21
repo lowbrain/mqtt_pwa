@@ -4,9 +4,7 @@ import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 
 onMounted(() => {
-  Notification.requestPermission( permission => {
-    if (permission !== 'granted') throw new Error("We weren't granted permission.")
-  })
+  console.log('onMounted')
 })
 </script>
 
