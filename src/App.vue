@@ -3,8 +3,25 @@ import { onMounted } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 
+const randomNotification = async () => {
+  const sw = await navigator.serviceWorker.getRegistration()
+  let options = {
+    body: 'メッセージ'
+  }
+  if (sw && Notification.permission === 'granted') {
+    console.log('メッセージ出力', sw)
+    await sw.showNotification('タイトル', options)
+    setTimeout(randomNotification, 30000)
+  }
+}
+
 onMounted(() => {
-  console.log('onMounted')
+  // 通知設定
+  Notification.requestPermission().then((permission) => {
+    if (permission === 'granted') {
+      randomNotification()
+    }
+  })
 })
 </script>
 
